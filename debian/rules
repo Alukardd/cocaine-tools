@@ -1,15 +1,8 @@
 #!/usr/bin/make -f
 
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/python-standalone-app.mk
 
-ifeq (lucid,$(shell lsb_release -sc))
-include debian/lucid.mk
-else
-%:
-	dh $@ --with python2,bash-completion
+PYTHON_PKG_SCRIPT_MKLINKS = 1
 
-override_dh_install:
-	install -d debian/tmp/etc/cocaine-tornado-proxy
-	install -m644 debian/cocaine-tornado-proxy.conf debian/tmp/etc/cocaine-tornado-proxy/cocaine-tornado-proxy.conf
-	dh_install
-endif
 
